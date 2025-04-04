@@ -1,0 +1,44 @@
+import numpy as np
+
+def mse_loss(y_true, y_pred):
+    return np.mean((y_true - y_pred) ** 2) 
+
+# Dane uczące
+X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+y = np.array([[0], [1], [1], [0]])
+
+# Inicjalizacja wag i parametrów
+np.random.seed(42)
+weights = np.random.uniform(-1, 1, (2, 1))
+learning_rate = 0.01
+beta1 = 0.9
+beta2 = 0.999
+epsilon = 1e-8
+
+m = np.zeros_like(weights)
+v = np.zeros_like(weights)
+
+# Proces optymalizacji Adam
+for epoch in range(2000):
+    # Propagacja w przód
+    predictions = 1 / (1 + np.exp(-np.dot(X, weights)))
+    loss = mse_loss(y, predictions)
+
+    # Obliczanie gradientów
+    gradients = np.dot(X.T, (predictions - y) * predictions * (1 - predictions)) / len(X)
+
+    # Aktualizacja momentów
+    m = beta1 * m + (1 - beta1) * gradients
+    v = beta2 * v + (1 - beta2) * (gradients ** 2)
+
+    # Korekta biasu
+    m_corrected = m / (1 - beta1 ** (epoch + 1))
+    v_corrected = v / (1 - beta2 ** (epoch + 1))
+
+    # Aktualizacja wag
+    weights -= learning_rate * m_corrected / (np.sqrt(v_corrected) + epsilon)
+
+    if epoch % 10 == 0:
+        print(f"Epoch {epoch}, Loss: {loss}, Weights: {weights}")
+
+print("Optymalizacja zakończona. Finalne wagi:", weights)
