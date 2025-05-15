@@ -1,0 +1,19 @@
+*.class
+*.log
+
+# idea
+/.idea
+/target
+*.iml
+
+.venv/
+.pyenv/*
+venv/
+venv_p/
+dist/
+*.egg-info/
+build/
+### Mac ###
+.DS_Store
+
+terraform/
