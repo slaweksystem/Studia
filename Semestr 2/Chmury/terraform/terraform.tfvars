@@ -1,0 +1,2 @@
+ENV = ""
+SUBSCRIPTION_ID = ""
