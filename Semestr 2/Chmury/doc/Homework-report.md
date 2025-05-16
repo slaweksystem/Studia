@@ -34,14 +34,14 @@ The ETL job design:
 
 ```mermaid
 graph TD;
-create_spark_session[Create Spark Session]-->load_hotels_data;
-load_hotels_data[Load Hotels Data]-->fill_missing;
-fill_missing[Fill missing Latitude & Longitude]-->add_geohash_hotels;
-add_geohash_hotels[Add Geohash to hotel data]-->load_weather_data;
-load_weather_data[Load Weather Data]-->add_geohash;
-add_geohash[Add Geohash to weather data]-->group_columns;
-group_columns[Group columns with the same geohash]-->left_join;
-left_join[Perform left join]-->save_data[Save enriched data];
+create_spark_session[Utwórz sesję Spark]-->load_hotels_data;
+load_hotels_data[Wczytaj dane o hotelach]-->fill_missing;
+fill_missing[Uzupełnij brakujące wartości szer./dł. geograficznej]-->add_geohash_hotels;
+add_geohash_hotels[Dodaj Geohash do danych hotelowych]-->load_weather_data;
+load_weather_data[Wczytaj dane pogodowe]-->add_geohash;
+add_geohash[Dodaj Geohash do danych pogodowych]-->group_columns;
+group_columns[Zgrupuj kolumny z tym samym geohashem]-->left_join;
+left_join[Wykonaj lewostronne złączenie]-->save_data[Zapisz wzbogacone dane];
 ```
 
 
