@@ -32,7 +32,7 @@ def memory_benchmark(table_cls, keys):
         for k in keys:
             _ = ht.search(k)
 
-        # sleep to make sure to collect results:
+        # male spanie na zebranie pomiarów
         time.sleep(0.02)
 
     mem_usage = memory_usage(run, max_iterations=1, interval=0.01)
